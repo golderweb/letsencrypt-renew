@@ -1,7 +1,14 @@
 #!/bin/bash
 PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 
+# PATH to inifiles / letsencrypt dir
 LECONFIGDIR="~/.config/letsencrypt"
+
+# Catch missing LECONFIGDIR
+if [ ! -d "${LECONFIGDIR}" ]; then
+	echo "$0: ${LECONFIGDIR} does not exists! Maybe letsencrypt is not yet initialised!" >&2
+	exit 1
+fi
 
 # Get all existing inifiles matching namescheme cli-${domain}.ini
 for inifile in "${LECONFIGDIR}/cli-*.ini"; do
