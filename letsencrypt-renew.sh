@@ -13,13 +13,13 @@ for inifile in "${LECONFIGDIR}/cli-*.ini"; do
 	sleep $(expr $RANDOM % 600)
 
 	# Check validity of cert for domain
-	openssl x509 -checkend $(( 21 * 86400 )) -in ~/.config/letsencrypt/live/${domain}/cert.pem > /dev/null
+	openssl x509 -checkend $(( 21 * 86400 )) -in "${LECONFIGDIR}/live/${domain}/cert.pem" > /dev/null
 
 	if [ \$? != 0 ]; then
 		# run let's encrypt
-		letsencrypt certonly -c ~/.config/letsencrypt/cli-${domain}.ini
+		letsencrypt certonly -c "${LECONFIGDIR}/letsencrypt/cli-${domain}.ini"
 		# import certificate
-		uberspace-add-certificate -k ~/.config/letsencrypt/live/${domain}/privkey.pem -c ~/.config/letsencrypt/live/${domain}/cert.pem
+		uberspace-add-certificate -k "${LECONFIGDIR}/live/${domain}/privkey.pem" -c "${LECONFIGDIR}/live/${domain}/cert.pem"
 	fi
 
 done
