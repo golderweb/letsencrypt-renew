@@ -1,11 +1,13 @@
 #!/bin/bash
 PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 
+LECONFIGDIR="~/.config/letsencrypt"
+
 # Get all existing inifiles matching namescheme cli-${domain}.ini
-for inifile in cli-*.ini; do
+for inifile in "${LECONFIGDIR}/cli-*.ini"; do
 
 	# Strip domain out of filename
-	domain=${inifile:4:-4}
+	domain=${inifile:$(( ${#LECONFIGDIR} + 5 )):-4}
 
 	# sleep for a random time so not all certificates get renewed at the same time
 	sleep $(expr $RANDOM % 600)
