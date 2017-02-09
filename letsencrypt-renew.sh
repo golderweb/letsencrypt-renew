@@ -8,7 +8,7 @@ openssl x509 -checkend $(( 21 * 86400 )) -in ~/.config/letsencrypt/live/${domain
 
 if [ \$? != 0 ]; then
 	# run let's encrypt
-	letsencrypt certonly
+	letsencrypt certonly -c ~/.config/letsencrypt/cli-${domain}.ini
 	# import certificate
 	uberspace-add-certificate -k ~/.config/letsencrypt/live/${domain}/privkey.pem -c ~/.config/letsencrypt/live/${domain}/cert.pem
 fi
