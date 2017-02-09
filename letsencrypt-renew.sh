@@ -10,6 +10,7 @@ for inifile in cli-*.ini; do
 # sleep for a random time so not all certificates get renewed at the same time
 sleep 473
 
+# Check validity of cert for domain
 openssl x509 -checkend $(( 21 * 86400 )) -in ~/.config/letsencrypt/live/${domain}/cert.pem > /dev/null
 
 if [ \$? != 0 ]; then
