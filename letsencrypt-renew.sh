@@ -1,6 +1,12 @@
 #!/bin/bash
 PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 
+# Get all existing inifiles matching namescheme cli-${domain}.ini
+for inifile in cli-*.ini; do
+
+	# Strip domain out of filename
+	domain=${inifile:4:-4}
+
 # sleep for a random time so not all certificates get renewed at the same time
 sleep 473
 
@@ -12,3 +18,5 @@ if [ \$? != 0 ]; then
 	# import certificate
 	uberspace-add-certificate -k ~/.config/letsencrypt/live/${domain}/privkey.pem -c ~/.config/letsencrypt/live/${domain}/cert.pem
 fi
+
+done
