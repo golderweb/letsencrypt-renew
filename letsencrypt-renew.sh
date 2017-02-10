@@ -42,8 +42,8 @@ fi
 # Get all existing inifiles matching namescheme cli-${domain}.ini
 for inifile in "${LECONFIGDIR}"/cli-*.ini; do
 
-	# Strip domain out of filename
-	domain=${inifile:$(( ${#LECONFIGDIR} + 5 )):-4}
+	# Get domain out of file (first value in property "domains")
+	domain=$(grep -e "[ \t]*domains.*" "${inifile}" | sed "s/ //g" |cut -d "=" -f2 | cut -d "," -f1)
 
 	# sleep for a random time so not all certificates get renewed at the same time
 	sleep $(expr $RANDOM % 600)
