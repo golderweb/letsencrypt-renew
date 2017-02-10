@@ -38,7 +38,7 @@ if [ ! -d "${LECONFIGDIR}" ]; then
 fi
 
 # Get all existing inifiles matching namescheme cli-${domain}.ini
-for inifile in "${LECONFIGDIR}/cli-*.ini"; do
+for inifile in "${LECONFIGDIR}"/cli-*.ini; do
 
 	# Strip domain out of filename
 	domain=${inifile:$(( ${#LECONFIGDIR} + 5 )):-4}
