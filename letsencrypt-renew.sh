@@ -30,7 +30,7 @@ PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 
 # PATH to inifiles / letsencrypt dir
 if [ -z "${LECONFIGDIR}" ]; then
-	LECONFIGDIR="~/.config/letsencrypt"
+	LECONFIGDIR=~/.config/letsencrypt
 fi
 
 # Catch missing LECONFIGDIR
