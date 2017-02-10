@@ -51,9 +51,9 @@ for inifile in "${LECONFIGDIR}"/cli-*.ini; do
 	# Check validity of cert for domain
 	openssl x509 -checkend $(( 21 * 86400 )) -in "${LECONFIGDIR}/live/${domain}/cert.pem" > /dev/null
 
-	if [ \$? != 0 ]; then
+	if [ $? != 0 ]; then
 		# run let's encrypt
-		letsencrypt certonly -c "${LECONFIGDIR}/letsencrypt/cli-${domain}.ini"
+		letsencrypt certonly -c "${LECONFIGDIR}/cli-${domain}.ini"
 		# import certificate
 		uberspace-add-certificate -k "${LECONFIGDIR}/live/${domain}/privkey.pem" -c "${LECONFIGDIR}/live/${domain}/cert.pem"
 	fi
