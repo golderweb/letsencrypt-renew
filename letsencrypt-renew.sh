@@ -53,7 +53,7 @@ for inifile in "${LECONFIGDIR}"/cli-*.ini; do
 
 	if [ $? != 0 ]; then
 		# run let's encrypt
-		letsencrypt certonly -c "${LECONFIGDIR}/cli-${domain}.ini"
+		letsencrypt certonly -c "${inifile}"
 		# import certificate
 		uberspace-add-certificate -k "${LECONFIGDIR}/live/${domain}/privkey.pem" -c "${LECONFIGDIR}/live/${domain}/cert.pem"
 	fi
